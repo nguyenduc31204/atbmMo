@@ -32,7 +32,6 @@ const downloadButton = document.querySelector('.download');
     
 });
 
-
 fileInput2.addEventListener('change', function(event) {
     console.log(fileInput.type);
             const reader = new FileReader();
@@ -44,11 +43,13 @@ fileInput2.addEventListener('change', function(event) {
                     })
                     .catch(function(err) {
                         console.error('Error reading DOCX file:', err);
-                        document.getElementById('inputky').value = 'Error reading DOCX file.';
+                        document.getElementById('inputktra').value = 'Error reading DOCX file.';
                     });
             };
             reader.readAsArrayBuffer(event.target.files[0]);
+    
 });
+
 
 //download
 downloadButton.addEventListener('click', async () => {
@@ -107,17 +108,18 @@ fileInput.addEventListener('change', (event) => {
   
   
   
+  
   fileInput2.addEventListener('change', (event) => {
     if(isTxtFile(event.target.files[0])){
         const reader = new FileReader();
   
         reader.onload = (e) => {
-        textArea2.value = e.target.result;
+          textArea2.value = e.target.result;
         };
+      
+        reader.readAsText(event.target.files[0]);
     }
     
-  
-    reader.readAsText(event.target.files[0]);
   });
   
   fileInput3.addEventListener('change', (event) => {
@@ -321,6 +323,6 @@ function ktrak(x) {
         document.querySelector("#thongbao").innerHTML += "\n-Văn bản chưa bị sửa đổi";
     }
     else{
-        document.querySelector("#thongbao").innerHTML += "Văn bản đã bị sửa đổi"
+        document.querySelector("#thongbao").innerHTML += "\n-Văn bản đã bị sửa đổi"
     } 
 };
