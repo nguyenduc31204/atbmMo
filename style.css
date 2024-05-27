@@ -1,0 +1,139 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: rgba(50, 54, 176, 0.244);
+}
+header{
+    margin-top: 50px;
+}
+
+h1{
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+
+label{
+    cursor: pointer;
+    border-radius: 6px;
+    
+}
+.form{
+    width: 45%;
+}
+
+.taok{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn:hover{
+    background-color: rgb(57, 94, 187);
+    color: #fff;
+}
+
+.btn{
+    padding: 10px;
+    background-color: rgb(52, 103, 233);
+    color: #fff;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    font-size: 15px;
+    border: 1px solid rgba(182, 36, 36, 0.133);
+    cursor: pointer;
+}
+
+.container{
+    display: flex;
+    justify-content: space-around;
+    height: 100vh;
+}
+
+.put{
+    display: none;
+}
+
+.fileinpt{
+    background-color:  rgb(52, 103, 233);
+    padding: 10px;
+    color: #fff;
+    margin-left: 20px;
+}
+
+.inpkta{
+    height: 80px;
+    margin: 15px;
+    width: 50%;
+    outline: 0;
+    overflow-inline: hidden;
+}
+
+.inp{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.out{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.theky{
+    padding: 39px 20px;
+    border: 1px solid #000;
+    width: 50%;
+    margin: 15px;
+}
+
+.btn1{
+    display: flex;
+    justify-content: center;
+}
+
+.btnktra{
+    margin-top: 40px;
+}
+
+.thongbao{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btnkt{
+    display: flex;
+    justify-content: center;
+}
+
+textarea{
+    background-color: transparent;
+    outline: 0;
+    color: #000000;
+}
+
+.nut{
+    display: grid;
+    gap: 10px;
+}
+.chuky{
+
+    width: 100%;
+
+}
+.num{
+    display: none;
+}
+
+.outbam{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    right: 20px;
+}
