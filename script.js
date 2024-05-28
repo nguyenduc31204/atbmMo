@@ -10,6 +10,7 @@ const textArea2 = document.getElementById('inputktra');
 const fileInput3 = document.getElementById('fileck');
 const textArea3 = document.getElementById('vanbanky');
 const textArea4 = document.getElementById('vanbanktra');
+const textArea5 = document.getElementById('anktra');
 const downloadButton = document.querySelector('.download');
 
 
@@ -55,7 +56,7 @@ fileInput2.addEventListener('change', function(event) {
 downloadButton.addEventListener('click', async () => {
     const fileType = 'txt'; // Loại tệp bạn muốn lưu, ví dụ: 'docx' hoặc 'txt'
     
-    const content = document.getElementById('vanbanky').innerHTML;
+    const content = document.getElementById('anky').innerHTML;
 
     try {
         // Tạo một Blob từ nội dung
@@ -88,6 +89,8 @@ downloadButton.addEventListener('click', async () => {
         alert('Đã xảy ra lỗi khi lưu file.');
     }
 });
+
+
 
 function isTxtFile(file) {
     return file.name.toLowerCase().endsWith('.txt');
@@ -122,10 +125,21 @@ fileInput.addEventListener('change', (event) => {
     
   });
   
+  function getValueAfterColon(input, key) {
+    // Tạo biểu thức chính quy để tìm cặp key: value
+    const regex = new RegExp(`${key}:\\s*([^\\s]+)`);
+    const match = input.match(regex);
+    return match ? match[1] : null;
+  }
+
   fileInput3.addEventListener('change', (event) => {
       const reader = new FileReader();
       reader.onload = (e) => {
-        textArea4.innerHTML = e.target.result;
+            textArea5.innerHTML = e.target.result;
+            const valueGama = getValueAfterColon(e.target.result, 'gama');
+            const valueXicma = getValueAfterColon(e.target.result, 'xicma');
+            textArea4.value = valueXicma;
+            console.log(textArea4.value);
       };
       reader.readAsText(event.target.files[0]);
     });
@@ -144,8 +158,11 @@ function checkPri(num){
 };
 
 chuyen.addEventListener('click', function () {  
-    document.querySelector("#vanbanktra").innerHTML = document.querySelector("#xicma").value;
+console.log(document.querySelector("#anky").innerHTML);
+    document.querySelector("#anktra").innerHTML = document.querySelector("#anky").innerHTML;
+    document.querySelector("#vanbanktra").value = document.querySelector("#xicma").value;
     document.querySelector("#inputktra").value = document.querySelector("#inputky").value;
+    console.log
 });
 
 
@@ -256,10 +273,11 @@ function tinhXicma(x){
         };
         cky.push(result); 
     }
-
-    var t = cky.map( item =>item.toString()).join(', ');
+    var s = cky;
+    var t = cky.map( item =>item.toString()).join(',');
     document.querySelector("#xicma").value = t;
     document.querySelector("#vanbanky").innerHTML = t;
+    document.querySelector("#anky").innerHTML ="gama:" + gama + "\nxicma:" +  s;
 };
 
 
@@ -277,9 +295,10 @@ function ktrak(x) {
 
     const beta = binhPhuongVoiNhan(soA, soAlpha, soP);
     const gama = parseInt(document.querySelector("#gama").value);
-    const xicma = document.querySelector("#vanbanktra").innerHTML;
+    const xicma = document.querySelector("#vanbanktra").value;
     const ckyg = document.querySelector("#vanbanky").innerHTML;
     console.log(ckyg);
+    console.log(xicma);
     var checkKy = false;
     if(ckyg == xicma){
         checkKy = true;
@@ -291,7 +310,7 @@ function ktrak(x) {
     }
 
     var xicm = [];
-    xicm = xicma.split(", ");
+    xicm = xicma.split(",");
     var end1= [];
     var end2= [];
     const hash = CryptoJS.MD5(x).toString(CryptoJS.enc.Hex);

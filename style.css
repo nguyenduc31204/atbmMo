@@ -83,11 +83,29 @@ label{
     justify-content: center;
     align-items: center;
 }
+.thekya{
+    display: none;
+}
+
 .theky{
     padding: 39px 20px;
     border: 1px solid #000;
     width: 50%;
     margin: 15px;
+}
+
+#vbBamKtra,
+#vbBamKy{
+    overflow: auto;
+}
+
+#anky,
+#anktra{
+    padding: 39px 20px;
+    border: 1px solid #000;
+    width: 50%;
+    margin: 15px;
+    overflow: auto;
 }
 
 .head1{
