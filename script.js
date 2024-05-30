@@ -55,39 +55,42 @@ fileInput2.addEventListener('change', function(event) {
 //download
 downloadButton.addEventListener('click', async () => {
     const fileType = 'txt'; // Loại tệp bạn muốn lưu, ví dụ: 'docx' hoặc 'txt'
-    
-    const content = document.getElementById('anky').innerHTML;
 
-    try {
-        // Tạo một Blob từ nội dung
-        const blob = new Blob([content], {
-            type: fileType === 'docx' ? 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' : 'text/plain;charset=utf-8'
-        });
+const content = document.getElementById('anky').innerHTML;
 
-        // Mở hộp thoại lưu file
-        const handle = await window.showSaveFilePicker({
-            suggestedName: `chuky.${fileType}`,
-            types: [{
+try {
+    // Tạo một Blob từ nội dung
+    const blob = new Blob([content], {
+        type: fileType === 'docx' ? 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' : 'text/plain;charset=utf-8'
+    });
+
+    // Mở hộp thoại lưu file với options chọn kiểu file
+    const handle = await window.showSaveFilePicker({
+        suggestedName: `chuky.${fileType}`,
+        types: [
+            {
+                description: 'Text Files',
                 accept: {
                     'text/plain': ['.txt']
                 }
-            }]
-        });
+            },
+            {
+                description: 'Word Documents',
+                accept: {
+                    'application/vnd.openxmlformats-officedocument.wordprocessingml.document': ['.docx']
+                }
+            }
+        ]
+    });
 
-        // Lấy quyền truy cập để ghi file
-        const writable = await handle.createWritable();
+    // Tạo một file stream để ghi dữ liệu
+    const writable = await handle.createWritable();
+    await writable.write(blob);
+    await writable.close();
+} catch (err) {
+    console.error('Lỗi khi lưu file:', err);
+}
 
-        // Ghi nội dung vào file
-        await writable.write(blob);
-
-        // Đóng file
-        await writable.close();
-        
-        alert('File đã được lưu thành công!');
-    } catch (err) {
-        console.error(err);
-        alert('Đã xảy ra lỗi khi lưu file.');
-    }
 });
 
 
@@ -179,12 +182,12 @@ function gCD(p, k) {
 
 // RANDOM KHÓA K
 taokhoa.addEventListener("click", function(){
-    let alpha = Math.floor(Math.random() * 1000000);
+    let alpha = Math.floor(Math.random() * 100000000);
     document.querySelector("#anpha").value = alpha;
-    var sp = Math.floor(Math.random() * 1000000);
-    var sk = Math.floor(Math.random() * 1000000);
+    var sp = Math.floor(Math.random() * 100000000);
+    var sk = Math.floor(Math.random() * 100000000);
     while(!checkPri(sp)){
-        sp = Math.floor(Math.random() * 1000000);
+        sp = Math.floor(Math.random() * 100000000);
     }
     document.querySelector("#p").value = sp;
     while(gCD(sk, (sp - 1)) != 1){
@@ -303,9 +306,18 @@ function ktrak(x) {
     if(ckyg == xicma){
         checkKy = true;
     };
-
+    const vb = document.querySelector("#inputky").value;
+    const hashky = CryptoJS.MD5(vb).toString(CryptoJS.enc.Hex);
+    const hash = CryptoJS.MD5(x).toString(CryptoJS.enc.Hex);
     if(!checkKy){
+        document.querySelector("#vbBamKtra").innerHTML = hash;
         document.querySelector("#thongbao").innerHTML = "chữ ký sai";
+        if(hash ==hashky){
+            document.querySelector("#thongbao").innerHTML += "\n-Văn bản chưa bị sửa đổi!";
+        }
+        else{
+            document.querySelector("#thongbao").innerHTML += "\n-Văn bản đã bị sửa đổi!";
+        }
         return;
     }
 
@@ -313,7 +325,7 @@ function ktrak(x) {
     xicm = xicma.split(",");
     var end1= [];
     var end2= [];
-    const hash = CryptoJS.MD5(x).toString(CryptoJS.enc.Hex);
+    
     document.querySelector("#vbBamKtra").innerHTML = hash;
     var hash1 = [];
     let n = 0;
