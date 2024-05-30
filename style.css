@@ -87,6 +87,13 @@ label{
     display: none;
 }
 
+.form{
+    border-left: 1px solid #00000046;
+    border-right: 1px solid #00000046;
+    height: 100vh;
+    border-radius: 62px;
+}
+
 .theky{
     padding: 39px 20px;
     border: 1px solid #000;
